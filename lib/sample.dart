@@ -1,8 +1,15 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 void main(){
-  runApp(MaterialApp(
-    home: Sample(),
-    debugShowCheckedModeBanner: false,));
+ runApp(DevicePreview
+   (isToolbarVisible: true,
+     builder: (BuildContext context)=>MaterialApp(
+   debugShowCheckedModeBanner: false,
+   useInheritedMediaQuery: true,
+
+   home:Sample(),
+     )
+ ));
 }
 class Sample extends StatelessWidget{
   @override
@@ -10,12 +17,9 @@ class Sample extends StatelessWidget{
  return Scaffold(
   appBar: AppBar(title: Text("welcome"),
   backgroundColor: Colors.red,)
-,   body: Container(decoration: BoxDecoration(gradient: LinearGradient(colors:
-[Colors.green,
-  Colors.red,
-  Colors.yellow]
-     ,begin: Alignment.bottomRight,
-   end: Alignment.centerRight
+,   body: Container(decoration: BoxDecoration(image: DecorationImage(image: AssetImage("asset/image/back.jpg"),
+   fit: BoxFit.fill
+
  )),
    width: double.infinity,
    height: double.infinity,
