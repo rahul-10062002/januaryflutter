@@ -35,6 +35,14 @@ class _NewloginState extends State<Newlogin> {
               Padding(
                 padding: const EdgeInsets.only(top: 30,bottom: 30,right: 50,left: 50),
                 child: TextFormField(
+                  validator: (username){
+                    if(username!.isEmpty || username.length<8){
+                      return "plaese eneter valid username";
+                    }
+                    else{
+                      return "null";
+                    }
+                  },
                   decoration: InputDecoration(
                   hintText: "username",
                   labelText: "username",
@@ -46,7 +54,7 @@ class _NewloginState extends State<Newlogin> {
                 padding: const EdgeInsets.only(top: 30,bottom: 30,right: 50,left: 50),
                 child: TextFormField(
                   validator: (password){
-                    if(password!.isEmpty || password!.length<6){
+                    if(password!.isEmpty || password.length<6){
                       return "plaese eneter valid password";
                     }
                     else{
@@ -86,13 +94,9 @@ class _NewloginState extends State<Newlogin> {
                         }
                   }, child:Text ("login")),
               TextButton(onPressed: (){
-                final valid=Formkey.currentState!.validate();
-                if(valid){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>newregistartion()));
-                }
-                else{
 
-                }
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>newregistartion()));
+
               }, child: Text("not a user ,register"))
 
             ],

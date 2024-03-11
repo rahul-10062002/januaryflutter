@@ -20,6 +20,7 @@ class listviewcustom extends StatelessWidget{
         color: Colors.red,
       ),
 
+
      ],)
       ),
 
