@@ -35,7 +35,7 @@ class staceg extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(top: 30,left: 10,child: Image(image: AssetImage("assets/images/menu.png"),height: 30,width: 30,color: Colors.white,)),
+          Positioned(top: 30,left: 10,child: Image(image: AssetImage("asset/image/menu.jpg"),height: 30,width: 30,color: Colors.white,)),
           Positioned(
             child: Text(
               "Profile",

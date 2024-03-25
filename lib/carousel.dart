@@ -10,22 +10,21 @@ class carouseleg extends StatelessWidget{
       body: Container(
         child: CarouselSlider(
         options: CarouselOptions(
-          height: 400,
-          aspectRatio: 16/9,
-          viewportFraction: 0.3,
-          initialPage: 0,
-          enableInfiniteScroll: true,
-          reverse: false,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 3),
-          autoPlayAnimationDuration: Duration(milliseconds: 800),
-          autoPlayCurve: Curves.bounceIn,
-          enlargeCenterPage: true,
-          enlargeFactor: 0.3,
-          scrollDirection: Axis.horizontal
-
+            height: double.infinity,
+            aspectRatio: 16 / 9,
+            viewportFraction: 0.8,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 5),
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            enlargeCenterPage: true,
+            enlargeFactor: 0.2,
+            scrollDirection: Axis.horizontal
         ), items: [
-          Image(image: AssetImage("asset/image/back.jpg")),
+          Image(image: AssetImage("asset/image/veg1.jpg")),
           Image(image: AssetImage("asset/image/back1.jpg")),
           Image(image: AssetImage("asset/image/rocky.jpg")),
           Image(image: AssetImage("asset/image/portugal.jpg")),
