@@ -13,11 +13,11 @@ class MyWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width*0.5,
+            width: MediaQuery.of(context).size.width*0.5 ,
            decoration: BoxDecoration(color: Colors.red),
           ),
           Container(
-            width: MediaQuery.of(context).size.width*0.5,
+            width:MediaQuery.of(context).size.width*0.5 ,
             decoration: BoxDecoration(color: Colors.green),
           )
         ],
