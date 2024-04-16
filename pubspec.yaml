@@ -49,6 +49,12 @@ dependencies:
   expansion_tile_card: ^3.0.0
   intro_screen_onboarding_flutter: ^1.0.0
   readmore: ^2.2.0
+  rive: ^0.13.1
+  image_picker: ^1.0.7
+  video_player:
+  google_maps_flutter:
+  shared_preferences: ^2.2.2
+  sqflite: 
 
 dev_dependencies:
   flutter_test:
