@@ -9,17 +9,17 @@ class dataadmineg extends StatefulWidget{
 class _dataadminegState extends State<dataadmineg> {
   var data;
   void delet(int id)async{
-    await SQLHELPER.Deleteuser(id);
+    await SQLHelper.Deleteuser(id);
     Refresh();
   }
-  bool isloading=true;
+
   @override
   void initState() {
    Refresh();
    super.initState();
   }
   void Refresh() async{
-    var mydata= await SQLHELPER.getAll();
+    var mydata= await SQLHelper.getAll();
     setState(() {
       data=mydata;
     });
@@ -27,7 +27,7 @@ class _dataadminegState extends State<dataadmineg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('admin panel'),),
-      body: isloading?Center(child: CircularProgressIndicator(),):ListView.builder(itemCount: data.length,itemBuilder: (context,index){
+      body:ListView.builder(itemCount: data.length,itemBuilder: (context,index){
         return Card(
        child: ListTile(title: Text("${data[index]['name']}"),
        trailing: IconButton(onPressed: () {delet(data[index]['id']);  }, icon: Icon(Icons.delete),),),

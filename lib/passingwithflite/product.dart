@@ -3,12 +3,7 @@ import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:januaryflutter/datapassing/dummyproducts.dart';
 import 'package:januaryflutter/datapassing/productdetails.dart';
-void main(){
-  runApp(MaterialApp(home: productsheet(),
 
-  routes: {'secondpage':(context)=>productdetils()},));
-
-}
 
 class productsheet extends StatefulWidget{
   @override

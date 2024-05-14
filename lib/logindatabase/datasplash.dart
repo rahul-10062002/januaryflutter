@@ -27,7 +27,7 @@ class _splashdataState extends State<splashdata> {
               child: Container(
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>datalogin1()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login_Form()));
                       },
                       child: Text(
                         "login",
@@ -42,7 +42,7 @@ class _splashdataState extends State<splashdata> {
               child: Container(
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>datasignup()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup_Form()));
                       },
                       child: Text(
                         "sign up",

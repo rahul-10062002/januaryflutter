@@ -1,184 +1,198 @@
+
 import 'package:flutter/material.dart';
-import 'package:januaryflutter/logindatabase/helperofsql1.dart';
 
 import 'datalog1.dart';
 import 'datasplash.dart';
+import 'helperofsql1.dart';
 
-void main() {
-  runApp(MaterialApp(home: datasignup(),));
-}
-
-class datasignup extends StatefulWidget {
+class Signup_Form extends StatefulWidget {
   @override
-  State<datasignup> createState() => _datasignupState();
+  State<Signup_Form> createState() => _Signup_FormState();
 }
 
-class _datasignupState extends State<datasignup> {
+class _Signup_FormState extends State<Signup_Form> {
+  var formkey1 = GlobalKey<FormState>();
+
   var conname = TextEditingController();
+
   var conemail = TextEditingController();
+
   var pass = TextEditingController();
+
   var cpass = TextEditingController();
-  GlobalKey<FormState>formkey = GlobalKey();
-  bool showpass = true;
 
   @override
   Widget build(BuildContext context) {
-    void Adduser(String name, String email, String password) async {
-      var id = await SQLHELPER.AddNewUser(name, email, password);
+    void Addnewuser(String name, String email, String password) async {
+      var id = await SQLHelper.AddNewUser(name, email, password);
 
       if (id != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => datalogin1()));
+            context, MaterialPageRoute(builder: (context) => Login_Form()));
       } else {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => splashdata()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) =>  splashdata()));
       }
     }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "SIGN UP",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-        ),
-      ),
       body: SingleChildScrollView(
-        child: Form(key: formkey,
-          child: Container(
-            child: Column(
-              children: [
-                SizedBox(height: 50,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50),
-                  child: TextFormField(
-                    controller: conname,
-                    validator: (name) {
-                      if (name!.isEmpty || name!.length < 8) {
-                        return "plaese enter valid name";
-                      }
-                      else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                        hintText: "name",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50))),
-                  ),
+        child: Form(
+          key: formkey1,
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 100.0),
+                child: Text(
+                  "Sign up",
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 30,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50),
-                  child: TextFormField(
-                    controller: conemail,
-                    validator: (emailid) {
-                      if (emailid!.isEmpty || emailid!.length < 10) {
-                        return "plaese enter valid email";
-                      }
-                      else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                        hintText: "emailid",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        prefixIcon: Icon(Icons.email),
-                        suffixIcon: Icon(Icons.visibility)),
-                  ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "create an Account,Its free",
+                  style: TextStyle(color: Colors.grey),
                 ),
-                SizedBox(height: 30,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50),
-                  child: TextFormField(
-                    controller: pass,
-                    validator: (password) {
-                      if (password!.isEmpty || password!.length < 6) {
-                        return "plaese enter valid password";
-                      }
-                      else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(hintText: "password",
+              ),
+              Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: TextFormField(
+                  controller: conname,
+                  validator: (name) {
+                    if (name!.isEmpty) {
+                      return "Name is required";
+                    } else
+                      return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      labelText: "Name",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      prefixIcon: Icon(Icons.password),
-                      suffixIcon: IconButton(onPressed: () {
-                        setState(() {
-                          if (showpass == true) {
-                            showpass = false;
-                          }
-                          else {
-                            showpass = true;
-                          }
-                        });
-                      },
-                        icon: Icon(showpass == true ? Icons.visibility_off : Icons
-                            .visibility),),
-                    ),
-                  ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
                 ),
-                SizedBox(height: 30,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50),
-                  child: TextFormField(
-                    controller: cpass,
-                    validator: (confpassword) {
-                      if (confpassword!.isEmpty || confpassword!.length < 6) {
-                        return "plaese confirm your password";
-                      } else if (pass.text != cpass.text) {
-                        return "password must be eaqual";
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(hintText: "confirm password",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        prefixIcon: Icon(Icons.password),
-                        suffixIcon: IconButton(onPressed: () {
-                          setState(() {
-                            if (showpass == true) {
-                              showpass = false;
-                            }
-                            else {
-                              showpass = false;
-                            }
-                          });
-                        },
-                          icon: Icon(
-                              showpass == true ? Icons.visibility_off : Icons
-                                  .visibility),)
-                    ),
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: TextFormField(
+                  controller: conemail,
+                  validator: (email) {
+                    if (email!.isEmpty &&
+                        email.contains("@") &&
+                        email.contains(".")) {
+                      return "Enter valid email";
+                    } else
+                      return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      labelText: "Email",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: ElevatedButton(onPressed: () async {
-                    final valid = formkey.currentState!.validate();
-                    if (valid) {
-                      ///if form state is bvalid data from the textfield to database
-                      String eemail = conemail.text;
-        
-                      var data = await SQLHELPER.userFound(eemail);
-        
+              ),
+              Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: TextFormField(
+                  validator: (pass1) {
+                    if (pass1!.isEmpty || pass1.length < 6) {
+                      return "Password must should be greater than 6";
+                    } else {
+                      return null;
+                    }
+                  },
+                  textInputAction: TextInputAction.next,
+                  controller: pass,
+                  obscureText: true,
+                  obscuringCharacter: '*',
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      labelText: "Password",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: TextFormField(
+                  validator: (pass1) {
+                    if (pass1!.isEmpty || pass1.length < 6) {
+                      return "Password must should be greater than 6";
+                    } else if (pass.text != cpass.text) {
+                      return "Password not matched";
+                    } else {
+                      return null;
+                    }
+                  },
+                  controller: cpass,
+                  obscureText: true,
+                  obscuringCharacter: '*',
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      labelText: "Confirm Password",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
+                ),
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                      minimumSize:
+                      MaterialStateProperty.all(const Size(330, 50)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ))),
+                  onPressed: () async {
+                    final valid1 = formkey1.currentState!.validate();
+
+                    if (valid1) {
+                      /// if form state is valid data from the textfield will upload to db
+                      String uname = conemail.text;
+                      String name = conname.text;
+
+                      var data = await SQLHelper.userFound(name, uname);
+
                       if (data.isNotEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("user already exist")));
-                      }
-                      else {
-                        Adduser(conname.text, conname.text, conname.text);
+                            const SnackBar(
+                                content: Text('User already exist')));
+                      } else {
+                        Addnewuser(conname.text, conemail.text, pass.text);
                       }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(action: SnackBarAction(label: 'UNDO',
-                            onPressed: () {},), content: Text(
-                              "Invalid username/password"),));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          action:
+                          SnackBarAction(label: 'UNDO', onPressed: () {}),
+                          content: const Text('Invalid username / password')));
                     }
-                  }, child: Text("sign up")),
-                )
-              ],
-            ),
+                  },
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(color: Colors.black),
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Alredy have an account?"),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Login_Form()));
+                      },
+                      child: const Text(
+                        "Login!!",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      )),
+                ],
+              )
+            ],
           ),
         ),
       ),

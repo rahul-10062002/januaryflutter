@@ -1,138 +1,139 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:januaryflutter/logindatabase/helperofsql1.dart';
 import 'package:januaryflutter/logindatabase/userhome.dart';
 
 import 'dataadmin.dart';
-import 'datasign.dart';
-void main(){
-  runApp(MaterialApp(home: datalogin1(),));
-}
-class datalogin1 extends StatefulWidget {
+import 'datasplash.dart';
+import 'helperofsql1.dart';
+
+class Login_Form extends StatefulWidget {
   @override
-  State<datalogin1> createState() => _datalogin1State();
+  State<Login_Form> createState() => _Login_FormState();
 }
 
-class _datalogin1State extends State<datalogin1> {
-  var coemail=TextEditingController();
-  var copass=TextEditingController();
-  GlobalKey<FormState>formkey=GlobalKey();
-  bool showpass=true;
+class _Login_FormState extends State<Login_Form> {
+
+  var formkey = GlobalKey<FormState>();
+  final TextEditingController conemail = TextEditingController();
+  final TextEditingController conpass = TextEditingController();
+
   void logincheck(String email, String password) async {
-    if(email=='admin@gmail.com' && password=='1234567'){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>dataadmineg()));
-    }else{
-      var data=await SQLHELPER.CheckLogin(email,password);
-      if(data.isNotEmpty){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>homeuser(data: data,)));
-        print('login success');
+    if (email == 'admin@gmail.com' && password == '123456') {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) =>  dataadmineg()));
+    } else {
+      var data = await SQLHelper.CheckLogin(email, password);
+      if (data.isNotEmpty) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => Home(data: data,)));
+        print('Login Success');
+      } else if (data.isEmpty) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => splashdata()));
+        print('Login faild');
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
+    bool hidepass = true;
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.red,
-        title: Text(
-          "LOGIN PAGE",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-        ),
+      appBar: AppBar(
+        title: const Text("LOGIN PAGE"),
       ),
-      body: Form(key: formkey,
-        child: Container(
-          decoration: BoxDecoration(color: Colors.yellow),
-          child: Column(
-            children: [
-              Text(
-                "LOGIN",
-                  style: GoogleFonts.aclonica(
-                      textStyle: Theme.of(context).textTheme.displayLarge,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w100,
-                      color: Colors.black),
-              ),
-              SizedBox(height: 80,),
-              Container(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50,right: 50),
-                      child: TextFormField(
-                        controller: coemail,
-                        validator:(emailid){
-                                    if(emailid!.isEmpty|| emailid!.length<10){
-                                    return "please enter valid email";
-                                    }
-                                    else{
-                                    return null;
-                                    }
-                                    }, decoration: InputDecoration(
-                            hintText: "email id",
-                            prefixIcon: Icon(Icons.email),
-                            suffixIcon: IconButton(onPressed: () {
-                              setState(() {
-                                if(showpass==true){
-                                  showpass=false;
-                                }
-                                else{
-                                  showpass=true;
-                                }
-                              });
-                            }, icon: Icon(showpass==true ? Icons.visibility_off : Icons.visibility),),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(100))),
-                      ),
-                    ),
-                    SizedBox(height: 50,),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50,right: 50),
-                      child: TextFormField(
-                        controller: copass,
-                        validator: (password){
-                          if(password!.isEmpty || password!.length<6){
-                            return "please enter valid password";
-                          }
-                          else{
-                            return null;
-                          }
-                        },
-                        obscuringCharacter: '*',
-                        obscureText: showpass,
-                        decoration: InputDecoration(
-                            hintText: "password",
-                            prefixIcon: Icon(Icons.password),
-                            suffixIcon: IconButton(onPressed: () {
-                              setState(() {
-                                if(showpass==true){
-                                   showpass=false;
-                                }
-                                else{
-                                  showpass=true;
-                                }
-                              });
-                            }, icon: Icon(showpass==true ? Icons.visibility_off : Icons.visibility),),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(100))),
-                      ),
-                    ),
-                    SizedBox(height: 30,),
-                    ElevatedButton(onPressed: () {
+      body: Form(
+        key: formkey,
+        child: ListView(
+          children: [
+            const Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    "Login Page",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextFormField(
+                controller: conemail,
+                decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.drive_file_rename_outline),
+                    labelText: "Email",
 
-                      final valid=formkey.currentState!.validate();
-                      if(valid){
-                        logincheck(coemail.text,copass.text);
-                      }
-                    }, child: Text("login")),
-                    SizedBox(height: 20,),
-                    TextButton(onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>datasignup()));
-                    }, child: Text("sign up here"))
-                  ],
+                    border: OutlineInputBorder(
+
+                      borderRadius: BorderRadius.circular(20),
+                    )
                 ),
-              )
-            ],
-          ),
+                validator: (text) {
+                  if (text!.isEmpty ||
+                      !text.contains('@') ||
+                      !text.contains(".")) {
+                    return "Enter valid Email!!!";
+                  }
+                },
+                textInputAction: TextInputAction.next,
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.all(20),
+                child: TextFormField(
+                  controller: conpass,
+                  obscureText: hidepass,
+                  obscuringCharacter: "*",
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          if (hidepass)
+                            hidepass = false;
+                          else
+                            hidepass = true;
+                        });
+                      },
+                      icon: Icon(
+                          hidepass ? Icons.visibility : Icons.visibility_off),
+                    ),
+                    labelText: "Password",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  validator: (pass) {
+                    if (pass!.isEmpty || pass.length < 6) {
+                      return "Password length should be greater than 6";
+                    }
+                  },
+                  textInputAction: TextInputAction.next,
+                )),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: MaterialButton(
+                color: Colors.pink,
+                textColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                onPressed: () {
+                  final valid = formkey.currentState!.validate();
+
+                  if (valid) {
+                    logincheck(conemail.text, conpass.text);
+                  } else {}
+                },
+                child: const Text("LOGIN"),
+              ),
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => splashdata()));
+                },
+                child: const Text('Not a User? Register Here!!!'))
+          ],
         ),
       ),
     );
