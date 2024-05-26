@@ -119,7 +119,7 @@ class _signinitState extends State<signinit> {
         if(passValidationResult==true){
           final user=Init(name: vname, email: vemail, password: vpass, course: vcourse, graduation: vgrad);
 
-          await DBFunction.instance.userSignUp(user);
+          await DBFunction.instance.userSignUp(User);
           Get.back();
           Get.snackbar("success", "account created");
         }

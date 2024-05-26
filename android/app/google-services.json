@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "686520160862",
+    "project_id": "minifire-6f86d",
+    "storage_bucket": "minifire-6f86d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686520160862:android:78cc6be1d503df03fd5acf",
+        "android_client_info": {
+          "package_name": "com.example.januaryflutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUq4N6IZaGTFgjt5SozF_nsCAo8-tQPZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
